@@ -1,5 +1,6 @@
 package com.vbs.bookstore.service;
 
+import com.vbs.bookstore.service.exception.ObjectNotFoundException;
 import com.vbs.bookstore.model.CategoriaModel;
 import com.vbs.bookstore.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,6 @@ public class CategoriaService {
 
     public CategoriaModel buscaPorId(Integer id){
         Optional<CategoriaModel> categoriaExiste = categoriaRepository.findById(id);
-        return categoriaExiste.orElse(null);
+        return categoriaExiste.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + CategoriaModel.class.getName()));
     }
 }

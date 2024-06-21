@@ -1,4 +1,4 @@
-package com.vbs.bookstore;
+package com.vbs.bookstore.controller;
 
 import com.vbs.bookstore.model.CategoriaModel;
 import com.vbs.bookstore.service.CategoriaService;
