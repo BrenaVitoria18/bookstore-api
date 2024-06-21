@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity(name = "categoria") //informa hibernate e jpa que a classe categoria é uma entidade, e que pode criar uma tabela no banco de dados
-
 public class CategoriaModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
