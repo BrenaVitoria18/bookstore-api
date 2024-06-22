@@ -6,6 +6,7 @@ import com.vbs.bookstore.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,9 @@ public class CategoriaService {
     public CategoriaModel buscaPorId(Integer id){
         Optional<CategoriaModel> categoriaExiste = categoriaRepository.findById(id);
         return categoriaExiste.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + CategoriaModel.class.getName()));
+    }
+
+    public List<CategoriaModel> buscaTodasCategorias(){
+        return categoriaRepository.findAll();
     }
 }
