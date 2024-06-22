@@ -23,4 +23,9 @@ public class CategoriaService {
     public List<CategoriaModel> buscaTodasCategorias(){
         return categoriaRepository.findAll();
     }
+
+    public CategoriaModel criarCategoria (CategoriaModel categoriaModel){
+        categoriaModel.setId(null);
+        return categoriaRepository.save(categoriaModel);
+    }
 }
