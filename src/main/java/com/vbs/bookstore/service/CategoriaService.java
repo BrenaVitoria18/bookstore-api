@@ -36,4 +36,9 @@ public class CategoriaService {
         categoriaModel.setDescricao(categoriaDTO.getDescricao());
         return categoriaRepository.save(categoriaModel);
     }
+
+    public void deletarCategoria(Integer id) {
+        buscaPorId(id);
+        categoriaRepository.deleteById(id);
+    }
 }
