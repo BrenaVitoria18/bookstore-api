@@ -1,5 +1,6 @@
 package com.vbs.bookstore.service;
 
+import com.vbs.bookstore.dto.CategoriaDTO;
 import com.vbs.bookstore.service.exception.ObjectNotFoundException;
 import com.vbs.bookstore.model.CategoriaModel;
 import com.vbs.bookstore.repository.CategoriaRepository;
@@ -26,6 +27,13 @@ public class CategoriaService {
 
     public CategoriaModel criarCategoria (CategoriaModel categoriaModel){
         categoriaModel.setId(null);
+        return categoriaRepository.save(categoriaModel);
+    }
+
+    public CategoriaModel atualizarCategoria(Integer id, CategoriaDTO categoriaDTO) {
+        CategoriaModel categoriaModel = buscaPorId(id);
+        categoriaModel.setNome(categoriaDTO.getNome());
+        categoriaModel.setDescricao(categoriaDTO.getDescricao());
         return categoriaRepository.save(categoriaModel);
     }
 }

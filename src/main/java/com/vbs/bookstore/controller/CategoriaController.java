@@ -41,4 +41,10 @@ public class CategoriaController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoriaModel.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Integer id, @RequestBody CategoriaDTO categoriaDTO){
+        CategoriaModel categoriaModel = categoriaService.atualizarCategoria(id, categoriaDTO);
+        return ResponseEntity.ok().body(new CategoriaDTO(categoriaModel));
+    }
 }
