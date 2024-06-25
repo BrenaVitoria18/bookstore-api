@@ -5,6 +5,7 @@ import com.vbs.bookstore.service.exception.ObjectNotFoundException;
 import com.vbs.bookstore.model.CategoriaModel;
 import com.vbs.bookstore.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +40,10 @@ public class CategoriaService {
 
     public void deletarCategoria(Integer id) {
         buscaPorId(id);
-        categoriaRepository.deleteById(id);
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw  new com.vbs.bookstore.service.exception.DataIntegrityViolationException("Categoria não pode ser deletada, pois possui livros associados");
+        }
     }
 }
