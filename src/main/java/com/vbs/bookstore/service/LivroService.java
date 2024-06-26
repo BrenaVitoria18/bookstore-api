@@ -51,4 +51,9 @@ public class LivroService {
 
         return livroRepository.save(livroModel);
     }
+
+    public void deletarlivro(Integer id) {
+        LivroModel livroModel = buscaLivroPorId(id);
+        livroRepository.delete(livroModel);
+    }
 }

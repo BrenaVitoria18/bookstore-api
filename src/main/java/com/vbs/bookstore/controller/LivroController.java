@@ -1,10 +1,9 @@
-package com.vbs.bookstore.controller.exception;
+package com.vbs.bookstore.controller;
 
 import com.vbs.bookstore.dto.LivroDTO;
 import com.vbs.bookstore.model.LivroModel;
 import com.vbs.bookstore.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -45,5 +44,10 @@ public class LivroController {
         LivroModel livroModel1 = livroService.salvarLivro(idCategoria, livroModel);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(livroModel1.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarLivro(@PathVariable Integer id){
+        livroService.deletarlivro(id);
+        return ResponseEntity.noContent().build();
     }
 }
