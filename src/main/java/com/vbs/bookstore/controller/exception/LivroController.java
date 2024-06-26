@@ -4,6 +4,7 @@ import com.vbs.bookstore.dto.LivroDTO;
 import com.vbs.bookstore.model.LivroModel;
 import com.vbs.bookstore.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +29,11 @@ public class LivroController {
         List<LivroDTO>listaDTO = lista.stream().map(obj -> new LivroDTO(obj)).collect(Collectors.toList());
         //localhost:8080/livros?categoria=1
         return ResponseEntity.ok().body(listaDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<LivroModel> atualizarLivro(@PathVariable Integer id, @RequestBody LivroModel livroModel){
+        LivroModel livroModel1 = livroService.atualizarLivro(id, livroModel);
+        return ResponseEntity.ok().body(livroModel1);
     }
 }

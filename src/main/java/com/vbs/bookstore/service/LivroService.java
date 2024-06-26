@@ -28,4 +28,17 @@ public class LivroService {
         categoriaService.buscaPorId(idCategoria);
         return livroRepository.buscaLivrosPorCategorias(idCategoria);
     }
+
+    public LivroModel atualizarLivro(Integer id, LivroModel livroModel) {
+        LivroModel livroModel1 = buscaLivroPorId(id);
+        AtualizaDados(livroModel1, livroModel);
+
+        return livroRepository.save(livroModel1);
+    }
+
+    private void AtualizaDados(LivroModel livroModel1, LivroModel livroModel) {
+        livroModel1.setTitulo(livroModel.getTitulo());
+        livroModel1.setNomeAutor(livroModel.getNomeAutor());
+        livroModel1.setTexto(livroModel.getTexto());
+    }
 }
