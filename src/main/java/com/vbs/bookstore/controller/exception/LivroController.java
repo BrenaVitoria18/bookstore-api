@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,5 +37,13 @@ public class LivroController {
     public ResponseEntity<LivroModel> atualizarLivro(@PathVariable Integer id, @RequestBody LivroModel livroModel){
         LivroModel livroModel1 = livroService.atualizarLivro(id, livroModel);
         return ResponseEntity.ok().body(livroModel1);
+    }
+
+    @PostMapping
+    public ResponseEntity<LivroModel> salvarLivro (@RequestParam(value = "categoria", defaultValue = "0") Integer idCategoria,
+                                                   @RequestBody LivroModel livroModel){
+        LivroModel livroModel1 = livroService.salvarLivro(idCategoria, livroModel);
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(livroModel1.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }
