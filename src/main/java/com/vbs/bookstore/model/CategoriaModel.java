@@ -2,7 +2,9 @@ package com.vbs.bookstore.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +18,13 @@ public class CategoriaModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Campo nome é obrigatorio")
+    @Length(min = 3, max = 100, message = "O campo nome deve ter entre 3 a 100 caracteres")
     private String nome;
+
+    @NotEmpty(message = "Campo nome é obrigatorio")
+    @Length(min = 3, max = 200, message = "O campo nome deve ter entre 3 a 200 caracteres")
     private String descricao;
 
     @OneToMany(mappedBy = "categoria")
